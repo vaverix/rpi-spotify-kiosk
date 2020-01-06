@@ -17,7 +17,7 @@
         ></iframe>
       </el-tab-pane>
       <el-tab-pane label="USB" name="usb">USB</el-tab-pane>
-      <el-tab-pane label="+ Tab" name="addtab"></el-tab-pane>
+      <el-tab-pane label="+Tab" name="addtab"></el-tab-pane>
       <el-tab-pane
         v-for="item in editableTabs"
         :key="item.name"
@@ -46,7 +46,10 @@ export default {
       editableTabsValue: 'spotify',
       editableTabs: [],
       tabIndex: 0,
-      nowTime: `${now.getHours()} : ${now.getMinutes()}`
+      nowTime: `${now.getHours()} : ${String(now.getMinutes()).padStart(
+        2,
+        '0'
+      )}`
     }
   },
   methods: {
