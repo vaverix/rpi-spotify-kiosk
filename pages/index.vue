@@ -1,5 +1,5 @@
 <template>
-  <div class="container" onload="window.open('', '_self', '');">
+  <div class="rpi-container">
     <el-tabs
       @tab-click="clickTab"
       @tab-remove="removeTab"
@@ -7,7 +7,7 @@
       v-model="editableTabsValue"
       tab-position="left"
     >
-      <el-tab-pane label="Spotify" name="spotify">
+      <el-tab-pane label="spotify" name="spotify">
         <iframe
           frameborder="0"
           src="https://open.spotify.com"
@@ -16,8 +16,17 @@
           allow="geolocation; encrypted-media"
         ></iframe>
       </el-tab-pane>
-      <el-tab-pane label="USB" name="usb">USB</el-tab-pane>
-      <el-tab-pane label="+ Tab" name="addtab"></el-tab-pane>
+      <el-tab-pane label="gmaps" name="googlemaps">
+        <iframe
+          frameborder="0"
+          src="https://maps.google.com"
+          width="100%"
+          height="100%"
+          allow="geolocation; encrypted-media"
+        ></iframe>
+      </el-tab-pane>
+      <el-tab-pane label="usb" name="usb">USB</el-tab-pane>
+      <el-tab-pane label="+tab" name="addtab"></el-tab-pane>
       <el-tab-pane
         v-for="item in editableTabs"
         :key="item.name"
@@ -33,7 +42,8 @@
         :disabled="true"
         name="dateTime"
       ></el-tab-pane>
-      <el-tab-pane label="Exit" name="turnoff"></el-tab-pane>
+      <el-tab-pane label="refresh" name="refresh"></el-tab-pane>
+      <el-tab-pane label="exit" name="turnoff"></el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -43,6 +53,7 @@ export default {
   data() {
     const now = new Date()
     return {
+      volume: 20,
       editableTabsValue: 'spotify',
       editableTabs: [],
       tabIndex: 0,
@@ -79,8 +90,23 @@ export default {
       if (targetName.name === 'turnoff') {
         location.href = 'http://exitkiosk'
       }
+      if (targetName.name === 'refresh') {
+        location.reload()
+      }
       if (targetName.name === 'addtab') {
         this.addTab(targetName)
+      }
+    },
+    increaseVolume() {
+      this.volume += 10
+      if (this.volume > 100) {
+        this.volume = 100
+      }
+    },
+    decreaseVolume() {
+      this.volume -= 10
+      if (this.volume < 0) {
+        this.volume = 0
       }
     }
   }
@@ -88,8 +114,17 @@ export default {
 </script>
 
 <style>
+#tab-turnoff,
+#tab-dateTime {
+  font-size: 12px;
+  text-align: center;
+}
+.el-tabs--left .el-tabs__item.is-left {
+  text-align: center;
+}
 .el-tabs__header {
   padding-top: 40px;
+  padding-right: 0px;
 }
 .el-tab-pane {
   padding-left: 10px;
@@ -97,39 +132,22 @@ export default {
 .el-tabs__content,
 .el-tab-pane,
 iframe {
-  min-height: 99vh;
+  min-height: 100vh;
 }
 .el-tabs {
+  background: url(/rpi.png) no-repeat;
+  background-size: 28px;
+  background-position: 30px 6px;
   width: 100%;
 }
-.container {
+.rpi-container {
   margin: 0 auto;
+  position: relative;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: baseline;
-  text-align: left;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+  align-items: initial;
+  text-align: center;
+  overflow: hidden;
 }
 </style>
