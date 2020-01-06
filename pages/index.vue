@@ -33,7 +33,7 @@
         :disabled="true"
         name="dateTime"
       ></el-tab-pane>
-      <el-tab-pane label="Exittttt" name="turnoff"></el-tab-pane>
+      <el-tab-pane label="Exit" name="turnoff"></el-tab-pane>
     </el-tabs>
   </div>
 </template>
