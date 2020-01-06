@@ -19,7 +19,7 @@
       <el-tab-pane label="gmaps" name="googlemaps">
         <iframe
           frameborder="0"
-          src="https://maps.google.com"
+          src="https://www.google.pl/maps/"
           width="100%"
           height="100%"
           allow="geolocation; encrypted-media"
