@@ -17,7 +17,7 @@
         ></iframe>
       </el-tab-pane>
       <el-tab-pane label="USB" name="usb">USB</el-tab-pane>
-      <el-tab-pane label="+Tab" name="addtab"></el-tab-pane>
+      <el-tab-pane label="+ Tab" name="addtab"></el-tab-pane>
       <el-tab-pane
         v-for="item in editableTabs"
         :key="item.name"
