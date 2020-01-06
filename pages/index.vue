@@ -133,7 +133,7 @@ export default {
 .el-tabs__content,
 .el-tab-pane,
 iframe {
-  min-height: 100vh;
+  min-height: 99vh;
 }
 .el-tabs {
   background: url(/rpi.png) no-repeat;
