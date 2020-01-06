@@ -25,7 +25,6 @@
           allow="geolocation; encrypted-media"
         ></iframe>
       </el-tab-pane>
-      <el-tab-pane label="usb" name="usb">USB</el-tab-pane>
       <el-tab-pane label="+tab" name="addtab"></el-tab-pane>
       <el-tab-pane
         v-for="item in editableTabs"
