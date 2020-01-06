@@ -115,6 +115,7 @@ export default {
 
 <style>
 #tab-turnoff,
+#tab-refresh,
 #tab-dateTime {
   font-size: 12px;
   text-align: center;
