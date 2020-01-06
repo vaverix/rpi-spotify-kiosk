@@ -39,8 +39,6 @@
 </template>
 
 <script>
-import 'element-theme-dark'
-
 export default {
   data() {
     const now = new Date()
