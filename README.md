@@ -1,6 +1,6 @@
-# rpi
+# rpi-spotify-kiosk
 
-> My ace Nuxt.js project
+> In development. No details currently available
 
 ## Build Setup
 
