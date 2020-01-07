@@ -37,7 +37,7 @@
       </el-tab-pane>
       <el-tab-pane :disabled="true" label="" name="spacer"></el-tab-pane>
       <el-tab-pane
-        :label="nowTime"
+        :label="nowTime()"
         :disabled="true"
         name="dateTime"
       ></el-tab-pane>
@@ -65,22 +65,21 @@
 <script>
 export default {
   data() {
-    const now = new Date()
     return {
       volume: 0,
       activeTab: 'spotify',
       editableTabs: [],
-      tabIndex: 0,
-      nowTime: `${now.getHours()} : ${String(now.getMinutes()).padStart(
-        2,
-        '0'
-      )}`
+      tabIndex: 0
     }
   },
   mounted() {
     this.getVolume()
   },
   methods: {
+    nowTime() {
+      const now = new Date()
+      return `${now.getHours()} : ${String(now.getMinutes()).padStart(2, '0')}`
+    },
     addTab(targetName) {
       const newTabName = ++this.tabIndex + Math.random()
       this.editableTabs.push({
