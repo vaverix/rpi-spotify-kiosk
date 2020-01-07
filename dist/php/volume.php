@@ -5,7 +5,7 @@ if ($volume != 0 && empty($volume)) {
     $command = 'sudo vol';
     $output = shell_exec($command);
 } else {
-    $command = 'sudo vol '.$volume;
+    $command = 'sudo vol '.intval($volume);
     $output = shell_exec($command);
 }
 echo $output;
