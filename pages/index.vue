@@ -90,7 +90,7 @@ export default {
         location.href = 'http://exitkiosk'
       }
       if (targetName.name === 'refresh') {
-        location.reload()
+        this.updateAndRefresh()
       }
       if (targetName.name === 'addtab') {
         this.addTab(targetName)
@@ -107,6 +107,11 @@ export default {
       if (this.volume < 0) {
         this.volume = 0
       }
+    },
+    async updateAndRefresh() {
+      const response = await this.$axios.$get('http://localhost/update')
+      alert(response)
+      location.reload()
     }
   }
 }
