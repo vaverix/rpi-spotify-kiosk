@@ -109,6 +109,7 @@ export default {
       }
     },
     async updateAndRefresh() {
+      alert('Please wait...')
       const response = await this.$axios.$get('http://localhost/php/update')
       alert(response)
       location.reload()
