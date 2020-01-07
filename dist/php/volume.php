@@ -2,9 +2,9 @@
 error_reporting(E_ALL);
 $volume = $_GET['percent'];
 if (empty($volume)) {
-    $output = shell_exec('vol');
+    passthru('vol', $output);
 } else {
-    $output = shell_exec('vol '.$volume);
+    passthru('vol '.$volume, $output);
 }
 echo "<pre>$output</pre>";
 ?>
