@@ -8,5 +8,5 @@ if ($volume != 0 && empty($volume)) {
     $command = 'sudo vol '.$volume;
     $output = shell_exec($command);
 }
-echo("command: $command<br>output: $output");
+echo $output;
 ?>
