@@ -1,10 +1,10 @@
 <?php
 error_reporting(E_ALL);
 $volume = $_GET['percent'];
-
 if (empty($volume)) {
-    echo shell_exec('vol');
+    $output = shell_exec('vol');
 } else {
-    echo shell_exec('vol '.$volume);
+    $output = shell_exec('vol '.$volume);
 }
+echo "<pre>$output</pre>";
 ?>
