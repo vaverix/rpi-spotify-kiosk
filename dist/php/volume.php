@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL);
 $volume = $_GET['percent'];
 
 if (empty($volume)) {
@@ -7,3 +7,4 @@ if (empty($volume)) {
 } else {
     echo shell_exec('vol '.$volume);
 }
+?>
