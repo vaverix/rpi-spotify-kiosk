@@ -109,7 +109,7 @@ export default {
       }
     },
     async updateAndRefresh() {
-      const response = await this.$axios.$get('http://localhost/update')
+      const response = await this.$axios.$get('http://localhost/php/update')
       alert(response)
       location.reload()
     }
