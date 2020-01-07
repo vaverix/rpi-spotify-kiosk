@@ -116,7 +116,9 @@ export default {
     },
     async updateAndRefresh() {
       try {
-        const response = await this.$axios.$get('http://localhost/php/update')
+        const response = await this.$axios.$get(
+          'http://localhost/php/update.php'
+        )
         alert(response)
       } catch (error) {
         alert(error)
