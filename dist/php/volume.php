@@ -2,9 +2,9 @@
 error_reporting(E_ALL);
 $volume = $_GET['percent'];
 if (empty($volume)) {
-    $output = exec('vol');
+    $output = shell_exec('vol');
 } else {
-    $output = exec('vol '.$volume);
+    $output = shell_exec('vol '.$volume);
 }
 echo "<pre>$output</pre>";
 ?>

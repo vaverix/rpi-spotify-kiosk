@@ -1,4 +1,4 @@
 <?php
-$output = exec('ls -lart');
+$output = shell_exec('ls -lart');
 echo "<pre>$output</pre>";
 ?>
