@@ -6,6 +6,4 @@ if (empty($volume)) {
 } else {
     $output = system('sudo vol '.$volume);
 }
-file_put_contents("/var/log/lighttpd/access.log", $output, FILE_APPEND | LOCK_EX);
-die("$output");
 ?>
