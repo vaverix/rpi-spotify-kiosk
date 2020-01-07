@@ -4,7 +4,7 @@
       @tab-click="clickTab"
       @tab-remove="removeTab"
       :stretch="true"
-      v-model="editableTabsValue"
+      v-model="activeTab"
       tab-position="left"
     >
       <el-tab-pane label="spotify" name="spotify">
@@ -41,15 +41,16 @@
         :disabled="true"
         name="dateTime"
       ></el-tab-pane>
-      <el-tab-pane label="refresh" name="refresh">
-        <el-row>
-          <el-col :span="24">
-            <div v-loading="true" class="fake-container"></div>
-          </el-col>
-        </el-row>
-      </el-tab-pane>
+      <el-tab-pane label="refresh" name="refresh"></el-tab-pane>
       <el-tab-pane label="exit" name="turnoff"></el-tab-pane>
     </el-tabs>
+    <el-slider
+      v-model="volume"
+      class="volume-slider"
+      vertical
+      height="98vh"
+      step="10"
+    ></el-slider>
   </div>
 </template>
 
@@ -58,8 +59,8 @@ export default {
   data() {
     const now = new Date()
     return {
-      volume: 20,
-      editableTabsValue: 'spotify',
+      volume: 50,
+      activeTab: 'spotify',
       editableTabs: [],
       tabIndex: 0,
       nowTime: `${now.getHours()} : ${String(now.getMinutes()).padStart(
@@ -82,21 +83,41 @@ export default {
           allow="geolocation; encrypted-media"
         ></iframe>`
       })
-      this.editableTabsValue = newTabName
+      this.activeTab = newTabName
     },
     removeTab(targetName) {
       this.tabIndex--
       this.editableTabs = this.editableTabs.filter(
         (tab) => tab.name !== targetName
       )
-      this.editableTabsValue = 'spotify'
+      this.activeTab = 'spotify'
     },
     clickTab(targetName) {
       if (targetName.name === 'turnoff') {
-        this.exit()
+        this.$confirm('Are you sure you want to exit?', 'Warning', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'error'
+        })
+          .then(() => {
+            this.exit()
+          })
+          .catch(() => {
+            this.activeTab = 'spotify'
+          })
       }
       if (targetName.name === 'refresh') {
-        this.updateAndRefresh()
+        this.$confirm('Are you sure you want to refresh the page?', 'Warning', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'error'
+        })
+          .then(() => {
+            this.updateAndRefresh()
+          })
+          .catch(() => {
+            this.activeTab = 'spotify'
+          })
       }
       if (targetName.name === 'addtab') {
         this.addTab(targetName)
@@ -107,11 +128,22 @@ export default {
       if (this.volume > 100) {
         this.volume = 100
       }
+      this.updateVolume()
     },
     decreaseVolume() {
       this.volume -= 10
       if (this.volume < 0) {
         this.volume = 0
+      }
+      this.updateVolume()
+    },
+    async updateVolume() {
+      try {
+        await this.$axios.$get(
+          `http://localhost/php/volume.php?percent=${this.percent}`
+        )
+      } catch (error) {
+        alert(error)
       }
     },
     async exit() {
@@ -153,6 +185,7 @@ export default {
 .el-tab-pane {
   padding-left: 10px;
 }
+.rpi-container,
 .el-tabs__content,
 .el-tab-pane,
 iframe {
@@ -167,7 +200,6 @@ iframe {
 .rpi-container {
   margin: 0 auto;
   position: relative;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: initial;
@@ -176,5 +208,8 @@ iframe {
 }
 .fake-container {
   min-height: 99vh;
+}
+.volume-slider {
+  padding-top: 10px;
 }
 </style>
