@@ -149,25 +149,25 @@ export default {
         const response = await this.$axios.$get(
           `http://localhost/php/volume.php?percent=${this.volume}`
         )
-        this.$message.success(response)
+        this.$message.error(response.data)
       } catch (error) {
-        this.$message.error(error)
-      }
-    },
-    async exit() {
-      try {
-        await this.$axios.$get('http://localhost/php/exit.php')
-      } catch (error) {
-        this.$message.error(error)
+        this.$message.error(`Volume ${error}`)
       }
     },
     async updateAndRefresh() {
       try {
         await this.$axios.$get('http://localhost/php/update.php')
       } catch (error) {
-        this.$message.error(error)
+        this.$message.error(`Refresh ${error}`)
       }
       location.reload()
+    },
+    async exit() {
+      try {
+        await this.$axios.$get('http://localhost/php/exit.php')
+      } catch (error) {
+        this.$message.error(`Exit ${error}`)
+      }
     }
   }
 }
