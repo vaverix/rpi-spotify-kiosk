@@ -7,5 +7,5 @@ if (empty($volume)) {
     $output = system('sudo vol '.$volume);
 }
 file_put_contents("/var/log/lighttpd/access.log", $output, FILE_APPEND | LOCK_EX);
-echo "Percent: $volume<br>Output: <pre>$output</pre>";
+die("$output");
 ?>
