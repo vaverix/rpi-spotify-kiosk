@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-$volume = $_GET['percent'];
+$volume = isset($_GET['percent']) ? $_GET['percent'] : '';
 if (empty($volume)) {
     $output = system('vol');
 } else {
