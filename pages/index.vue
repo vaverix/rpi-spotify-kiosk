@@ -93,7 +93,7 @@ export default {
     },
     clickTab(targetName) {
       if (targetName.name === 'turnoff') {
-        location.href = 'http://exitkiosk'
+        this.exit()
       }
       if (targetName.name === 'refresh') {
         this.updateAndRefresh()
@@ -112,6 +112,14 @@ export default {
       this.volume -= 10
       if (this.volume < 0) {
         this.volume = 0
+      }
+    },
+    async exit() {
+      try {
+        const response = await this.$axios.$get('http://localhost/php/exit.php')
+        alert(response)
+      } catch (error) {
+        alert(error)
       }
     },
     async updateAndRefresh() {
