@@ -57,6 +57,7 @@
       vertical
       height="96vh"
       step="10"
+      show-tooltip="false"
     ></el-slider>
   </div>
 </template>
@@ -66,7 +67,7 @@ export default {
   data() {
     const now = new Date()
     return {
-      volume: 50,
+      volume: 0,
       activeTab: 'spotify',
       editableTabs: [],
       tabIndex: 0,
