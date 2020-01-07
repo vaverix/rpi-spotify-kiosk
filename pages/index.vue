@@ -55,7 +55,7 @@
       v-model="volume"
       class="volume-slider"
       vertical
-      height="98vh"
+      height="96vh"
       step="10"
     ></el-slider>
   </div>
