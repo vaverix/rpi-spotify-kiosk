@@ -41,7 +41,13 @@
         :disabled="true"
         name="dateTime"
       ></el-tab-pane>
-      <el-tab-pane label="refresh" name="refresh"></el-tab-pane>
+      <el-tab-pane label="refresh" name="refresh">
+        <el-row>
+          <el-col :span="24"
+            ><div v-loading="true" class="fake-container"></div>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
       <el-tab-pane label="exit" name="turnoff"></el-tab-pane>
     </el-tabs>
     <el-slider
@@ -143,26 +149,23 @@ export default {
         const response = await this.$axios.$get(
           `http://localhost/php/volume.php?percent=${this.percent}`
         )
-        this.$message(response)
+        this.$message.success(response)
       } catch (error) {
-        alert(error)
+        this.$message.error(error)
       }
     },
     async exit() {
       try {
         await this.$axios.$get('http://localhost/php/exit.php')
       } catch (error) {
-        alert(error)
+        this.$message.error(error)
       }
     },
     async updateAndRefresh() {
       try {
-        const response = await this.$axios.$get(
-          'http://localhost/php/update.php'
-        )
-        alert(response)
+        await this.$axios.$get('http://localhost/php/update.php')
       } catch (error) {
-        alert(error)
+        this.$message.error(error)
       }
       location.reload()
     }
