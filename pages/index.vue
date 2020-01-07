@@ -150,12 +150,10 @@ export default {
     async getVolume() {
       try {
         const response = await this.$axios.$get(
-          `http://192.168.0.17/php/volume.php`
+          `http://localhost/php/volume.php`
         )
-        console.log('response') // eslint-disable-line
-        console.log(response) // eslint-disable-line
+        this.volume = parseInt(response)
       } catch (error) {
-        console.log(error) // eslint-disable-line
         this.$message.error(`VolumeGet ${error}`)
       }
     },
