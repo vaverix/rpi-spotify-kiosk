@@ -116,8 +116,7 @@ export default {
     },
     async exit() {
       try {
-        const response = await this.$axios.$get('http://localhost/php/exit.php')
-        alert(response)
+        await this.$axios.$get('http://localhost/php/exit.php')
       } catch (error) {
         alert(error)
       }
