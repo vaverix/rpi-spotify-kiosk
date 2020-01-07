@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/plain');
 error_reporting(E_ALL);
 $volume = isset($_GET['percent']) ? $_GET['percent'] : '';
 if ($volume != 0 && empty($volume)) {

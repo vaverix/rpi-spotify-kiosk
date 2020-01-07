@@ -76,6 +76,9 @@ export default {
       )}`
     }
   },
+  mounted() {
+    this.getVolume()
+  },
   methods: {
     addTab(targetName) {
       const newTabName = ++this.tabIndex + Math.random()
@@ -143,6 +146,18 @@ export default {
         this.volume = 0
       }
       this.updateVolume()
+    },
+    async getVolume() {
+      try {
+        const response = await this.$axios.$get(
+          `http://192.168.0.17/php/volume.php`
+        )
+        console.log('response') // eslint-disable-line
+        console.log(response) // eslint-disable-line
+      } catch (error) {
+        console.log(error) // eslint-disable-line
+        this.$message.error(`VolumeGet ${error}`)
+      }
     },
     async updateVolume() {
       try {
