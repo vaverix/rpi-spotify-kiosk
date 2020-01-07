@@ -41,7 +41,13 @@
         :disabled="true"
         name="dateTime"
       ></el-tab-pane>
-      <el-tab-pane label="refresh" name="refresh"></el-tab-pane>
+      <el-tab-pane label="refresh" name="refresh">
+        <el-row>
+          <el-col :span="24">
+            <div v-loading="true" class="fake-container"></div>
+          </el-col>
+        </el-row>
+      </el-tab-pane>
       <el-tab-pane label="exit" name="turnoff"></el-tab-pane>
     </el-tabs>
   </div>
@@ -109,9 +115,12 @@ export default {
       }
     },
     async updateAndRefresh() {
-      alert('Please wait...')
-      const response = await this.$axios.$get('http://localhost/php/update')
-      alert(response)
+      try {
+        const response = await this.$axios.$get('http://localhost/php/update')
+        alert(response)
+      } catch (error) {
+        alert(error)
+      }
       location.reload()
     }
   }
@@ -155,5 +164,8 @@ iframe {
   align-items: initial;
   text-align: center;
   overflow: hidden;
+}
+.fake-container {
+  min-height: 99vh;
 }
 </style>
