@@ -147,7 +147,7 @@ export default {
     async updateVolume() {
       try {
         const response = await this.$axios.$get(
-          `http://localhost/php/volume.php?percent=${this.percent}`
+          `http://localhost/php/volume.php?percent=${this.volume}`
         )
         this.$message.success(response)
       } catch (error) {
