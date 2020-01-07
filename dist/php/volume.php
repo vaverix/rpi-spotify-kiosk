@@ -10,5 +10,4 @@ if ($volume != 0 && empty($volume)) {
     $command = 'sudo vol '.intval($volume);
     $output = shell_exec($command);
 }
-echo $output;
-?>
+die($output)
