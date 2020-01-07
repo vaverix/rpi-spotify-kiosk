@@ -45,6 +45,7 @@
       <el-tab-pane label="exit" name="turnoff"></el-tab-pane>
     </el-tabs>
     <el-slider
+      @change="updateVolume"
       v-model="volume"
       class="volume-slider"
       vertical
@@ -139,9 +140,10 @@ export default {
     },
     async updateVolume() {
       try {
-        await this.$axios.$get(
+        const response = await this.$axios.$get(
           `http://localhost/php/volume.php?percent=${this.percent}`
         )
+        this.$message(response)
       } catch (error) {
         alert(error)
       }
